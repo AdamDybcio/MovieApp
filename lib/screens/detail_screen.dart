@@ -51,9 +51,11 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
               expandedHeight: 200,
               pinned: true,
               flexibleSpace: FlexibleSpaceBar(
+                centerTitle: true,
+                titlePadding: const EdgeInsets.only(bottom: 30),
                 title: Text(
-                  movie.title.length > 40
-                      ? "${movie.title.substring(0, 37)}..."
+                  movie.title.length > 47
+                      ? "${movie.title.substring(0, 47)}..."
                       : movie.title,
                   style: const TextStyle(
                     fontSize: 12,
@@ -71,20 +73,19 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                           ),
                         ),
                       ),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.5),
-                        ),
-                      ),
                     ),
                     Container(
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           begin: Alignment.bottomCenter,
-                          end: Alignment.topCenter,
+                          end: Alignment.center,
                           colors: [
-                            Colors.black.withOpacity(0.9),
-                            Colors.black.withOpacity(0),
+                            Style.Colors.mainColor.withOpacity(1),
+                            Style.Colors.mainColor.withOpacity(0.0),
+                          ],
+                          stops: const [
+                            0.0,
+                            0.5,
                           ],
                         ),
                       ),
@@ -106,7 +107,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            movie.rating.toString(),
+                            movie.rating.toStringAsFixed(2),
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 14,
@@ -132,6 +133,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                             onRatingUpdate: (rating) {
                               print(rating);
                             },
+                            unratedColor: Colors.white,
                           ),
                         ],
                       ),

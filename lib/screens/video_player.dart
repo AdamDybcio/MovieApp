@@ -25,10 +25,11 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
           ),
           Positioned(
             top: 40,
-            right: 20,
+            right: 10,
             child: IconButton(
               icon: const Icon(
                 EvaIcons.closeCircle,
+                size: 30,
               ),
               color: Colors.white,
               onPressed: () {

@@ -39,15 +39,29 @@ class _GenreScreenState extends State<GenresScreen> {
 
   Widget _buildLoadingWidget() {
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          SizedBox(
-            height: 25,
-            width: 25,
-            child: CircularProgressIndicator(),
-          )
-        ],
+      child: Container(
+        height: 307,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            SizedBox(
+              height: 25,
+              width: 25,
+              child: CircularProgressIndicator(),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              'Loading Genres...',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

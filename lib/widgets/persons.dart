@@ -62,15 +62,29 @@ class _PersonsListState extends State<PersonsList> {
 
   Widget _buildLoadingWidget() {
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          SizedBox(
-            height: 25,
-            width: 25,
-            child: CircularProgressIndicator(),
-          )
-        ],
+      child: Container(
+        height: 130,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            SizedBox(
+              height: 25,
+              width: 25,
+              child: CircularProgressIndicator(),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              'Loading Persons...',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -80,7 +94,14 @@ class _PersonsListState extends State<PersonsList> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('Error occured: $error'),
+          Text(
+            'Error occured: $error',
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ],
       ),
     );

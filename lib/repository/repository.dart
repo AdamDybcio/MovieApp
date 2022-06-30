@@ -18,6 +18,7 @@ class MovieRepository {
   var getGenresUrl = "$mainUrl/genre/movie/list";
   var getPersonsUrl = "$mainUrl/trending/person/week";
   var movieUrl = "$mainUrl/movie";
+  var castInfoUrl = "$mainUrl/person";
 
   Future<MovieResponse> getMovies() async {
     var params = {

@@ -6,6 +6,7 @@ import 'package:movie_app/bloc/get_movies_bloc.dart';
 
 import '../models/movie.dart';
 import '../models/movie_response.dart';
+import '../screens/detail_screen.dart';
 import '../style/theme.dart' as Style;
 
 class SimilarMovies extends StatefulWidget {
@@ -139,18 +140,30 @@ class _SimilarMoviesState extends State<SimilarMovies> {
                             ],
                           ),
                         )
-                      : Container(
-                          width: 120,
-                          height: 180,
-                          decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(2),
-                            ),
-                            shape: BoxShape.rectangle,
-                            image: DecorationImage(
-                              image: NetworkImage(
-                                  "https://image.tmdb.org/t/p/w200${movies[index].poster}"),
-                              fit: BoxFit.cover,
+                      : GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).pop();
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    MovieDetailScreen(movie: movies[index]),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            width: 120,
+                            height: 180,
+                            decoration: BoxDecoration(
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(2),
+                              ),
+                              shape: BoxShape.rectangle,
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                    "https://image.tmdb.org/t/p/w200${movies[index].poster}"),
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         ),
@@ -161,6 +174,7 @@ class _SimilarMoviesState extends State<SimilarMovies> {
                     width: 100,
                     child: Text(
                       movies[index].title,
+                      textAlign: TextAlign.center,
                       maxLines: 2,
                       style: const TextStyle(
                         height: 1.4,
@@ -176,7 +190,7 @@ class _SimilarMoviesState extends State<SimilarMovies> {
                   Row(
                     children: [
                       Text(
-                        movies[index].rating.toString(),
+                        movies[index].rating.toStringAsFixed(2),
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 10,
@@ -188,8 +202,10 @@ class _SimilarMoviesState extends State<SimilarMovies> {
                       ),
                       RatingBar.builder(
                         itemSize: 8,
+                        unratedColor: Colors.white,
                         initialRating: movies[index].rating / 2,
                         minRating: 1,
+                        maxRating: 10,
                         direction: Axis.horizontal,
                         allowHalfRating: true,
                         itemCount: 5,

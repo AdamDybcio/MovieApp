@@ -179,7 +179,7 @@ class _MovieInfoState extends State<MovieInfo> {
                 height: 10,
               ),
               Container(
-                height: 30,
+                height: 35,
                 padding: const EdgeInsets.only(top: 5),
                 child: ListView.builder(
                     scrollDirection: Axis.horizontal,
@@ -203,7 +203,7 @@ class _MovieInfoState extends State<MovieInfo> {
                             style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w300,
-                              fontSize: 9,
+                              fontSize: 13,
                             ),
                           ),
                         ),

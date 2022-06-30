@@ -5,6 +5,7 @@ import 'package:movie_app/bloc/get_movies_bloc.dart';
 
 import '../models/movie.dart';
 import '../models/movie_response.dart';
+import '../screens/detail_screen.dart';
 import '../style/theme.dart' as Style;
 
 class TopMovies extends StatefulWidget {
@@ -63,15 +64,29 @@ class _TopMoviesState extends State<TopMovies> {
 
   Widget _buildLoadingWidget() {
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          SizedBox(
-            height: 25,
-            width: 25,
-            child: CircularProgressIndicator(),
-          )
-        ],
+      child: Container(
+        height: 270,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            SizedBox(
+              height: 25,
+              width: 25,
+              child: CircularProgressIndicator(),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              'Loading Top Movies...',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -81,7 +96,14 @@ class _TopMoviesState extends State<TopMovies> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('Error occured: $error'),
+          Text(
+            'Error occured: $error',
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ],
       ),
     );
@@ -128,18 +150,29 @@ class _TopMoviesState extends State<TopMovies> {
                             ],
                           ),
                         )
-                      : Container(
-                          width: 120,
-                          height: 180,
-                          decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(2),
-                            ),
-                            shape: BoxShape.rectangle,
-                            image: DecorationImage(
-                              image: NetworkImage(
-                                  "https://image.tmdb.org/t/p/w200${movies[index].poster}"),
-                              fit: BoxFit.cover,
+                      : GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    MovieDetailScreen(movie: movies[index]),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            width: 120,
+                            height: 180,
+                            decoration: BoxDecoration(
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(2),
+                              ),
+                              shape: BoxShape.rectangle,
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                    "https://image.tmdb.org/t/p/w200${movies[index].poster}"),
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         ),
@@ -180,6 +213,7 @@ class _TopMoviesState extends State<TopMovies> {
                         initialRating: movies[index].rating / 2,
                         minRating: 1,
                         direction: Axis.horizontal,
+                        unratedColor: Colors.white,
                         allowHalfRating: true,
                         itemCount: 5,
                         itemPadding: const EdgeInsets.symmetric(horizontal: 2),
@@ -187,9 +221,7 @@ class _TopMoviesState extends State<TopMovies> {
                           EvaIcons.star,
                           color: Style.Colors.secondColor,
                         ),
-                        onRatingUpdate: (rating) {
-                          print(rating);
-                        },
+                        onRatingUpdate: (rating) {},
                       ),
                     ],
                   ),

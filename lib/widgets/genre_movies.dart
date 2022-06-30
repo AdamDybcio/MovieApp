@@ -46,15 +46,29 @@ class _GenreMoviesState extends State<GenreMovies> {
 
   Widget _buildLoadingWidget() {
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          SizedBox(
-            height: 25,
-            width: 25,
-            child: CircularProgressIndicator(),
-          )
-        ],
+      child: Container(
+        height: 270,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            SizedBox(
+              height: 25,
+              width: 25,
+              child: CircularProgressIndicator(),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              'Loading Genre Movies...',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -64,7 +78,14 @@ class _GenreMoviesState extends State<GenreMovies> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('Error occured: $error'),
+          Text(
+            'Error occured: $error',
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ],
       ),
     );
@@ -175,6 +196,7 @@ class _GenreMoviesState extends State<GenreMovies> {
                           initialRating: movies[index].rating / 2,
                           minRating: 1,
                           direction: Axis.horizontal,
+                          unratedColor: Colors.white,
                           allowHalfRating: true,
                           itemCount: 5,
                           itemPadding:

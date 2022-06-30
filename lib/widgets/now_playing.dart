@@ -5,6 +5,7 @@ import 'package:page_indicator/page_indicator.dart';
 import '../bloc/get_now_playing_bloc.dart';
 import '../models/movie.dart';
 import '../models/movie_response.dart';
+import '../screens/detail_screen.dart';
 import '../style/theme.dart' as Style;
 
 class NowPlaying extends StatefulWidget {
@@ -41,15 +42,29 @@ class _NowPlayingState extends State<NowPlaying> {
 
   Widget _buildLoadingWidget() {
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          SizedBox(
-            height: 25,
-            width: 25,
-            child: CircularProgressIndicator(),
-          )
-        ],
+      child: Container(
+        height: 220,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            SizedBox(
+              height: 25,
+              width: 25,
+              child: CircularProgressIndicator(),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              'Loading Now Playing Movies...',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -59,7 +74,14 @@ class _NowPlayingState extends State<NowPlaying> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('Error occured: $error'),
+          Text(
+            'Error occured: $error',
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ],
       ),
     );
@@ -93,71 +115,84 @@ class _NowPlayingState extends State<NowPlaying> {
             scrollDirection: Axis.horizontal,
             itemCount: movies.take(5).length,
             itemBuilder: (context, index) {
-              return Stack(
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 220,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.rectangle,
-                      image: DecorationImage(
-                        image: NetworkImage(
-                            "https://image.tmdb.org/t/p/original${movies[index].backPoster}"),
-                        fit: BoxFit.cover,
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          MovieDetailScreen(movie: movies[index]),
+                    ),
+                  );
+                },
+                child: Stack(
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 220,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.rectangle,
+                        image: DecorationImage(
+                          image: NetworkImage(
+                              "https://image.tmdb.org/t/p/original${movies[index].backPoster}"),
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                          colors: [
-                            Style.Colors.mainColor.withOpacity(1),
-                            Style.Colors.mainColor.withOpacity(0.0)
-                          ],
-                          begin: Alignment.bottomCenter,
-                          end: Alignment.topCenter,
-                          stops: const [
-                            0.0,
-                            0.9,
-                          ]),
-                    ),
-                  ),
-                  const Positioned(
-                    top: 0,
-                    bottom: 0,
-                    right: 0,
-                    left: 0,
-                    child: Icon(
-                      FontAwesomeIcons.circlePlay,
-                      color: Style.Colors.secondColor,
-                      size: 40,
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 30,
-                    child: Container(
-                      padding: const EdgeInsets.only(
-                        left: 10,
-                        right: 10,
+                    Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                            colors: [
+                              Style.Colors.mainColor.withOpacity(1),
+                              Style.Colors.mainColor.withOpacity(0.0)
+                            ],
+                            begin: Alignment.bottomCenter,
+                            end: Alignment.topCenter,
+                            stops: const [
+                              0.0,
+                              0.5,
+                            ]),
                       ),
-                      width: 250,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            movies[index].title,
-                            style: const TextStyle(
-                              height: 1.5,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
+                    ),
+                    Positioned(
+                      top: 0,
+                      bottom: 0,
+                      right: 0,
+                      left: 0,
+                      child: GestureDetector(
+                        child: const Icon(
+                          FontAwesomeIcons.circlePlay,
+                          color: Style.Colors.secondColor,
+                          size: 60,
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 30,
+                      child: Container(
+                        padding: const EdgeInsets.only(
+                          left: 10,
+                          right: 10,
+                        ),
+                        width: 250,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              movies[index].title,
+                              style: const TextStyle(
+                                height: 1.5,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               );
             },
           ),
