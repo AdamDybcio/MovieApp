@@ -1,0 +1,1 @@
+-keep class com.example.movie_app.BuildConfig { *; }
