@@ -1,12 +1,11 @@
 # MovieApp
 
-I will not hide that this is the most difficult application I have done so far (and I am still working on new features). It looks like this (version 1.0.0):
+I will not hide that this is the most difficult application I have done so far (and I am still working on new features). It looks like this (version 1.0.1):
 
-https://user-images.githubusercontent.com/68535467/176708262-00bff162-2c5c-421f-86a0-afcd95673615.mp4
+https://user-images.githubusercontent.com/68535467/176776844-f454ec10-9f0d-442e-986a-a80eb175aa10.mp4
 
 ## Cons of the application:
 - there are some bugs and shortcomings
-- ugly data reloading
 - too little functionality
 
 ## What have i learned:
@@ -17,4 +16,4 @@ https://user-images.githubusercontent.com/68535467/176708262-00bff162-2c5c-421f-
 - combining it all into one
 and many other less important things ...
 
-### I would like to point out that I will be sitting on this application a little longer, adding new functionalities and improving this application! Today (30/06/2022) I will release version 1.0.1 or only fixes!
+### I would like to point out that I will be sitting on this application a little longer, adding new functionalities and improving this application!
