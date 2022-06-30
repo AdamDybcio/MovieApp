@@ -31,7 +31,7 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 
-# IMPORTANT!!!
+# IMPORTANT
 # If you want this application to work properly for you - enter "TMDB API" in the search engine,
 # enter the first link and create your API key. Then create a ".env" file in the root directory of the project. 
 # In it, add the following line:
